@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block 'main' %}
+
+<div class="row mt-3 p-2 "><!-- 2st row START or header section START-->
+    <div class="col-md-3 p-3 bg-light"><!--filter section start or side bar-->
+        <h5>Filter by Category</h5><hr>
+        <a href="/product">All</a><br>
+        <a href="/catfilter/2">Mobile</a><br>
+        <a href="/catfilter/1">Shoes</a><br>
+        <a href="/catfilter/3">Cloth</a><br><br>
+
+        <h5>Sort by Price</h5><hr>
+        <a href="/sort/1">High To Low</a><br>
+        <a href="/sort/0">Low to High</a><br><br>
+
+        <h5>Filter by price</h5><hr>
+        <form action="/pricefilter" method="get">
+            <div class="mb-2">
+                <label for="Input1" class="form-label">Min</label>
+                <input type="text" class="form-control" id="Input1" name='min'>
+              </div>
+
+              <div class="mb-2">
+                <label for="Input2" class="form-label">Max</label>
+                <input type="text" class="form-control" id="Input2"  name='max'>
+              </div>
+
+              <div class="mb-2">
+                <input type="submit" name="" id="" value="Filter" class="btn btn-danger">
+              </div>
+        </form>
+        
+    </div><!--filter section end-->
+    <div class="col-md-9 bg-light p-3"> <!--product list section start-->
+        <div class="row">
+         
+          {% if errmsg %}
+          <div class="alert alert-danger" role="alert">
+              
+              {{errmsg}}
+          </div>
+          {% endif %}
+          {% for i in data %}
+          <div class="col-md-3 mb-3"><!--product 1 start-->
+            <div class="card" style="width: 100%; height:auto">
+              <img src="{{i.pimage.url  }}" class="card-img-top" alt="..." height="190px" width="auto">
+              <div class="card-body">
+                <h5 class="card-title">{{i.name}}</h5>
+                <p class="card-text"><strong>Price : </strong>Rs. {{i.price}}</p>
+                <a href="/product_detail/{{i.id}}" class="btn btn-primary">See Details</a>
+              </div>
+            </div>
+
+          </div><!--product 1 End-->
+          {% endfor %}
+
+          {% comment %} <div class="col-md-3"><!--product 2 start-->
+            <div class="card" style="width: 100%; height:auto">
+              <img src="{% static 'images/apple.png' %}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Apple</h5>
+                <p class="card-text"><strong>Price : </strong>Rs. 65000</p>
+                <a href="product_details.html" class="btn btn-primary">See Details</a>
+              </div>
+            </div>
+
+          </div><!--product 1 End-->
+          <div class="col-md-3"><!--product 3 start-->
+            <div class="card" style="width: 100%; height:auto">
+              <img src="{% static 'images/oneplus.jpg' %}"class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">One+</h5>
+                <p class="card-text"><strong>Price : </strong>Rs. 35000</p>
+                <a href="product_details.html" class="btn btn-primary">See Details</a>
+              </div>
+            </div>
+
+          </div><!--product 1 End-->
+          <div class="col-md-3"><!--product 1 start-->
+            <div class="card" style="width: 100%; height:auto">
+              <img src="{% static 'images/apple.png' %}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Apple</h5>
+                <p class="card-text"><strong>Price : </strong>Rs. 115000</p>
+                <a href="product_details.html" class="btn btn-primary">See Details</a>
+              </div>
+            </div>
+
+          </div><!--product 1 End--> {% endcomment %}
+        </div>
+        
+        </div>
+    </div><!--product list section start-->
+</div><!-- 2ND row end or MAIN section end-->
+
+{% endblock 'main' %}
